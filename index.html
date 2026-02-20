@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT. ARYOPUTRO NATURE INDUSTRY, CO. LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-brand { font-family: 'Cinzel', serif; }
+        .dropdown:hover .dropdown-menu { opacity: 1; transform: translateY(0); visibility: visible; }
+    </style>
+</head>
+<body class="bg-[#FDFCF8] text-[#1a1c19]">
+
+    <nav class="fixed w-full z-[100] bg-white/95 backdrop-blur-sm border-b border-stone-100">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-900 text-white px-3 py-1 rounded-sm"><span class="font-brand text-2xl">ANI</span></div>
+                <div class="flex flex-col border-l border-stone-300 pl-3">
+                    <span class="font-bold text-[11px] md:text-xs tracking-[0.1em] text-emerald-950 uppercase leading-none">Aryoputro Nature Industry</span>
+                    <span class="text-[9px] font-medium text-amber-700 tracking-[0.2em] uppercase mt-1">Co. Ltd</span>
+                </div>
+            </div>
+            <div class="hidden lg:flex items-center space-x-8 text-[10px] font-bold uppercase tracking-widest text-emerald-900">
+                <a href="index.html" class="hover:text-amber-700 transition">Beranda</a>
+                <div class="relative dropdown group">
+                    <button class="flex items-center hover:text-amber-700 transition">Unit Bisnis <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg></button>
+                    <div class="dropdown-menu absolute top-full left-0 w-48 bg-white shadow-xl opacity-0 invisible translate-y-2 transition-all duration-300 border-t-2 border-emerald-900 py-2">
+                        <a href="kayu.html" class="block px-6 py-3 hover:bg-stone-50">Industri Kayu</a>
+                        <a href="agraris.html" class="block px-6 py-3 hover:bg-stone-50">Ketahanan Pangan</a>
+                        <a href="premium.html" class="block px-6 py-3 hover:bg-stone-50">Premium Collection</a>
+                    </div>
+                </div>
+                <a href="https://wa.me/6281380018067" class="bg-emerald-950 text-white px-5 py-2 hover:bg-amber-800 transition">Inquiry</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center">
+        <div class="absolute inset-0 bg-stone-900">
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01674db4e?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover opacity-50">
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6">
+            <h4 class="text-amber-500 font-bold tracking-[0.5em] text-[10px] mb-6 uppercase">The Legacy of Kromengan</h4>
+            <h1 class="font-serif text-5xl md:text-8xl text-white leading-tight mb-8">Purity in <br> <span class="italic font-light">Industry.</span></h1>
+            <a href="#katalog" class="inline-block border border-white text-white px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-emerald-950 transition">Lihat Portofolio</a>
+        </div>
+    </header>
+
+    <section id="katalog" class="py-32 bg-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div class="space-y-6">
+                <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=800" class="aspect-[4/5] object-cover shadow-xl">
+                <h3 class="font-serif text-2xl">Sustainable Timber</h3>
+                <a href="kayu.html" class="inline-block text-[10px] font-bold uppercase border-b border-emerald-900">Eksplorasi Kayu →</a>
+            </div>
+            <div class="space-y-6 md:mt-12">
+                <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=800" class="aspect-[4/5] object-cover shadow-xl">
+                <h3 class="font-serif text-2xl">Food Security</h3>
+                <a href="agraris.html" class="inline-block text-[10px] font-bold uppercase border-b border-emerald-900">Ketahanan Pangan →</a>
+            </div>
+            <div class="space-y-6">
+                <img src="https://images.unsplash.com/photo-1615485242250-934c56259020?q=80&w=800" class="aspect-[4/5] object-cover shadow-xl">
+                <h3 class="font-serif text-2xl text-amber-700">Specialty Goods</h3>
+                <a href="premium.html" class="inline-block text-[10px] font-bold uppercase border-b border-amber-700">Premium Collection →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak" class="bg-[#0f1110] text-stone-500 py-24 px-6 border-t border-white/5 text-center">
+        <div class="bg-white text-emerald-950 px-4 py-1 mb-8 inline-block"><span class="font-brand text-xl">ANI</span></div>
+        <p class="text-sm font-bold text-stone-300 uppercase tracking-widest mb-6">PT. Aryoputro Nature Industry</p>
+        <div class="text-[11px] space-y-2 mb-10 tracking-widest uppercase">
+            <p>Desa Jambuwer, Kec. Kromengan</p>
+            <p>Kabupaten Malang, Jawa Timur</p>
+            <p class="text-amber-600 font-bold">WhatsApp: +62 813-8001-8067</p>
+        </div>
+        <p class="text-[10px] tracking-[0.4em] opacity-30 uppercase">© 2026 ANI - All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+
