@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Jun's Agrifarm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-brand { font-family: 'Cinzel', serif; }
+    </style>
+</head>
+<body class="bg-stone-900 text-stone-100 min-h-screen flex items-center justify-center p-6">
+
+    <div id="login-gate" class="bg-white p-10 shadow-2xl max-w-sm w-full text-center rounded-sm">
+        <div class="flex flex-col items-center mb-8">
+            <span class="font-brand text-2xl tracking-tighter text-emerald-900 leading-none">Jun's</span>
+            <span class="text-[8px] font-bold text-amber-700 tracking-[0.4em] uppercase italic mt-1">Admin Access</span>
+        </div>
+        <input type="password" id="admin-pass" placeholder="Masukkan Sandi Rahasia" class="w-full border-b-2 border-stone-200 p-3 mb-6 outline-none focus:border-emerald-900 text-stone-800 text-center font-bold">
+        <button onclick="checkAccess()" class="w-full bg-emerald-950 text-white py-4 font-bold text-[10px] uppercase tracking-widest hover:bg-amber-700 transition duration-500">Buka Dashboard</button>
+        <p id="error-msg" class="text-red-600 text-[10px] mt-4 hidden font-bold uppercase tracking-widest">Sandi Salah, Ler!</p>
+    </div>
+
+    <div id="admin-panel" class="bg-white text-stone-900 p-8 md:p-12 shadow-2xl max-w-4xl w-full hidden rounded-sm border-t-8 border-emerald-900">
+        <div class="flex justify-between items-center mb-10 border-b border-stone-100 pb-6">
+            <div>
+                <h1 class="text-2xl font-bold uppercase tracking-tighter text-emerald-950">Gudang Digital</h1>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest mt-1">Update Stok Jun's Agrifarm Jambuwer</p>
+            </div>
+            <button onclick="location.reload()" class="text-[10px] font-bold text-red-700 border border-red-100 px-4 py-2 hover:bg-red-50 transition uppercase tracking-widest">Logout</button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <form id="product-form" class="space-y-5">
+                <div>
+                    <label class="block text-[10px] font-bold mb-2 uppercase tracking-[0.2em] text-stone-400">Nama Produk</label>
+                    <input type="text" id="p-name" placeholder="Contoh: Robusta Kawi A1" class="w-full border border-stone-200 p-3 text-sm focus:border-emerald-900 outline-none transition" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold mb-2 uppercase tracking-[0.2em] text-stone-400">Harga</label>
+                        <input type="text" id="p-price" placeholder="Rp 85.000 / kg" class="w-full border border-stone-200 p-3 text-sm focus:border-emerald-900 outline-none transition" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold mb-2 uppercase tracking-[0.2em] text-stone-400">Kategori</label>
+                        <select id="p-cat" class="w-full border border-stone-200 p-3 text-sm focus:border-emerald-900 outline-none transition bg-white">
+                            <option value="Kopi">Kopi</option>
+                            <option value="Kayu">Kayu</option>
+                            <option value="Pangan">Pangan</option>
+                            <option value="Premium">Premium</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold mb-2 uppercase tracking-[0.2em] text-stone-400">Deskripsi Singkat</label>
+                    <textarea id="p-desc" placeholder="Jelaskan kualitas produk ini..." class="w-full border border-stone-200 p-3 text-sm h-24 focus:border-emerald-900 outline-none transition" required></textarea>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold mb-2 uppercase tracking-[0.2em] text-stone-400">Link Foto (URL)</label>
+                    <input type="text" id="p-img" placeholder="https://images.unsplash..." class="w-full border border-stone-200 p-3 text-sm focus:border-emerald-900 outline-none transition" required>
+                </div>
+                <button type="submit" id="submit-btn" class="w-full bg-emerald-950 text-white py-5 font-bold uppercase tracking-[0.3em] text-[10px] hover:bg-amber-700 transition shadow-xl">Update ke Database →</button>
+            </form>
+
+            <div class="bg-stone-50 p-6 flex flex-col justify-center items-center text-center">
+                <div id="status-icon" class="w-16 h-16 bg-stone-200 rounded-full flex items-center justify-center mb-4 transition-all duration-500">
+                    <svg class="w-8 h-8 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h3 id="status-text" class="text-xs font-bold uppercase tracking-widest text-stone-400">Siap Menunggu Data Baru</h3>
+                <p class="text-[10px] text-stone-400 mt-4 leading-relaxed italic">Pastikan data sudah benar sebelum dikirim ke server Supabase.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. KONEKSI SUPABASE
+        const supabaseUrl = 'https://iibuyyifyfbrcoybptxe.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpYnV5eWlmeWZicmNveWJwdHhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMTQwMjAsImV4cCI6MjA4OTg5MDAyMH0.qO5KDs1fN2mlQ5RRY8vnRWvOIG6iAztxDun361mv1dk';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. PASSWORD ADMIN (Ganti sesuka hati, Ardi!)
+        const SECRET_KEY = "kawi2026"; 
+
+        function checkAccess() {
+            const input = document.getElementById('admin-pass').value;
+            if(input === SECRET_KEY) {
+                document.getElementById('login-gate').classList.add('hidden');
+                document.getElementById('admin-panel').classList.remove('hidden');
+            } else {
+                document.getElementById('error-msg').classList.remove('hidden').classList.add('animate-shake');
+            }
+        }
+
+        // 3. LOGIKA SIMPAN DATA
+        const form = document.getElementById('product-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const statusText = document.getElementById('status-text');
+            const statusIcon = document.getElementById('status-icon');
+
+            btn.disabled = true;
+            btn.innerText = "MENGIRIM...";
+            
+            const name = document.getElementById('p-name').value;
+            const price = document.getElementById('p-price').value;
+            const desc = document.getElementById('p-desc').value;
+            const cat = document.getElementById('p-cat').value;
+            const img = document.getElementById('p-img').value;
+
+            try {
+                const { data, error } = await _supabase
+                    .from('products')
+                    .insert([{ name, price, description: desc, category: cat, image_url: img }]);
+
+                if (error) throw error;
+
+                // SUKSES
+                statusIcon.classList.replace('bg-stone-200', 'bg-emerald-100');
+                statusIcon.innerHTML = '<svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>';
+                statusText.innerText = "DATA BERHASIL DISIMPAN!";
+                statusText.classList.replace('text-stone-400', 'text-emerald-700');
+                form.reset();
+                
+            } catch (err) {
+                alert("Gagal Kirim: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "UPDATE KE DATABASE →";
+            }
+        });
+    </script>
+</body>
+</html>
