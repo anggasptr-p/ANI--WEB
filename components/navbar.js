@@ -1,6 +1,7 @@
 const navbarHTML = `
-<nav class="fixed w-full z-[100] bg-white/95 backdrop-blur-md border-b border-stone-100">
+<nav class="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-md border-b border-stone-100">
     <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+        </div>
         <a href="index.html" class="flex items-center space-x-2 group">
             <div class="w-8 h-8 text-emerald-950 group-hover:text-amber-700 transition">
                 <svg viewBox="0 0 100 100" fill="currentColor"><path d="M50,15 L85,75 L15,75 Z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
