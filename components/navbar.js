@@ -38,6 +38,7 @@ const navbarHTML = `
             <a href="admin-juns.html" onclick="toggleMenu()" class="text-[10px] font-bold uppercase tracking-[0.5em] text-stone-400">Private Access</a>
         </div>
     </div>
+    ';
 // Render dengan Safety Check
 const navTarget = document.getElementById('navbar-placeholder');
 if (navTarget) {
@@ -56,4 +57,4 @@ window.toggleMenu = function() {
         menu.classList.add('translate-y-full');
         document.body.style.overflow = 'auto';
     }
-};
+}';
