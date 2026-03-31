@@ -30,4 +30,10 @@ const footerHTML = `
 </div>
 `;
 
-document.getElementById('footer-placeholder').innerHTML = footerHTML;
+// Ganti baris document.getElementById paling bawah jadi ini:
+const footPlace = document.getElementById('footer-placeholder');
+if (footPlace) {
+    footPlace.innerHTML = footerHTML;
+} else {
+    console.error("Gagal nemu id 'footer-placeholder' di HTML lo, Ler!");
+}
