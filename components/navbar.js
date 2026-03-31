@@ -26,17 +26,18 @@ const navbarHTML = `
     </div>
 </nav>
 
-<div id="nav-menu" class="fixed inset-0 z-[110] bg-stone-50 translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col justify-center items-center">
-    <button onclick="toggleMenu()" class="absolute top-8 right-8 text-emerald-950 text-2xl font-light">✕</button>
-    <div class="flex flex-col space-y-8 text-center">
-        <a href="index.html" onclick="toggleMenu()" class="text-5xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Home</a>
-        <a href="agraris.html" onclick="toggleMenu()" class="text-5xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Our Story</a>
-        <a href="shop.html" onclick="toggleMenu()" class="text-5xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Shop</a>
-        <a href="admin-juns.html" onclick="toggleMenu()" class="text-[10px] font-bold uppercase tracking-[0.5em] text-stone-400 pt-12">Private Access</a>
+<div class="flex flex-col space-y-6 text-center">
+        <a href="index.html" onclick="toggleMenu()" class="text-4xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Home</a>
+        <a href="about.html" onclick="toggleMenu()" class="text-4xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Our Story</a>
+        <a href="agraris.html" onclick="toggleMenu()" class="text-4xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Agri Unit</a>
+        <a href="premium.html" onclick="toggleMenu()" class="text-4xl font-serif italic text-emerald-950 hover:text-amber-700 transition">Premium Gold</a>
+        <a href="shop.html" onclick="toggleMenu()" class="text-4xl font-serif italic text-emerald-950 hover:text-amber-700 transition underline underline-offset-8 decoration-amber-500">Shop</a>
+        
+        <div class="pt-8 flex flex-col space-y-4">
+            <a href="https://wa.me/6281380018067" class="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-800">Contact Sales</a>
+            <a href="admin-juns.html" onclick="toggleMenu()" class="text-[10px] font-bold uppercase tracking-[0.5em] text-stone-400">Private Access</a>
+        </div>
     </div>
-</div>
-`;
-
 // Render dengan Safety Check
 const navTarget = document.getElementById('navbar-placeholder');
 if (navTarget) {
