@@ -33,7 +33,13 @@ const navbarHTML = `
 </div>
 `;
 
-document.getElementById('navbar-placeholder').innerHTML = navbarHTML;
+// Ganti baris document.getElementById paling bawah jadi ini:
+const navPlace = document.getElementById('navbar-placeholder');
+if (navPlace) {
+    navPlace.innerHTML = navbarHTML;
+} else {
+    console.error("Gagal nemu id 'navbar-placeholder' di HTML lo, Ler!");
+}
 
 // Fungsi Global buat Toggle
 window.toggleMenu = function() {
